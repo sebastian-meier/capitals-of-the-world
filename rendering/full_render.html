@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>Walks</title>
+        <meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width">
+        <script src="../../libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
+		<script src="../../libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
+        <script src="../../libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
+    </head>
+    <body>
+        <script>
+            var width=2100, owidth = width,
+            	type="building", //building, //highway
+                height=500, oheight = height,
+                projection = d3.geo.mercator()
+                    .translate([width / 2, height / 2])
+                    .scale(1500000)
+                    .precision(0.1)
+                    .center([13.403528,52.540212]),
+                path = d3.geo.path()
+                    .projection(projection),
+                container = d3.select('body').append('svg').attr('width', width).attr('height', height),
+                svg = container.append("g"),
+                buildings = svg.append("g");
+
+            var cluster, cluster_id, cluster_count = 0;
+
+            d3.csv('countries.csv', function(err, data){
+                cluster = data;
+                cluster_id = data[0].cca3;
+                console.log("cities:",data.length);
+                processCluster();
+            });
+
+            var processed = 0,
+            	highway_data, building_data;
+
+            function processCluster(){
+
+                d3.json('highway/'+cluster_id+'.min.geojson', function(err, data){
+                	highway_data = data;
+                	d3.json('building/'+cluster_id+'.min.geojson', function(err, data){
+                		building_data = data;
+                    	
+                    	projection.center([cluster[processed].longitude, cluster[processed].latitude]);
+                    
+	                    var canvas = d3.select("body").append("canvas")
+	                        .attr("width", width)
+	                        .attr("height", height);
+
+	                    var context = canvas.node().getContext("2d");
+	                    var ctx_path = d3.geo.path()
+	                        .projection(projection)
+	                        .context(context);
+
+	                    for(var i = 0; i<building_data.features.length; i++){
+		                    context.beginPath();
+
+		                    var ftr = {type:"FeatureCollection",features:[building_data.features[i]]};
+
+		                    if(ftr.features[0].geometry.type === "Polygon"){
+
+		                    	ftr.features[0].geometry.coordinates[0] = ftr.features[0].geometry.coordinates[0].reverse();
+
+			                    ctx_path(ftr);
+
+		                    	context.closePath();
+
+			                    context.fillStyle = 'rgb(0, 0, 0)';
+		                    	context.fill();
+			                }
+		                }
+
+		                for(var i = 0; i<highway_data.features.length; i++){
+		                    context.beginPath();
+
+		                    var ftr = {type:"FeatureCollection",features:[highway_data.features[i]]};
+
+		                    if(ftr.features[0].geometry.type === "LineString"){
+			                    ctx_path(ftr);
+		                    	context.stroke();
+			                }
+		                }
+
+	                    var image_data = canvas.node().toDataURL();
+						canvas.remove();
+	                    $.ajax({
+	                        type: "POST",
+	                        url: "http://prjcts:8888/cityviscall/header/osm/save.php",
+	                        data: {
+	                            content: image_data,
+	                            name:cluster_id+"_both.png"
+	                        }
+	                    }).done(function() {
+
+			                processed++;
+			                nextCluster();
+
+						});
+					});
+                });
+            }
+
+            function nextCluster(){
+                cluster_count++;
+                if(cluster_count<cluster.length){
+                    cluster_id = cluster[cluster_count].cca3;
+                    processCluster();
+                }else{
+                    d3.select('body').selectAll('*').remove();
+                    d3.select('body').append('p').html('DONE!');
+                    console.log(processed);
+                }
+            }
+        </script>
+    </body>
+</html>

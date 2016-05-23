@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>Walks</title>
+        <meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width">
+        <script src="../../libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
+		<script src="../../libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
+        <script src="../../libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
+    </head>
+    <body>
+        <script>
+        	var cluster;
+
+            d3.csv('countries.csv', function(err, data){
+                cluster = data;
+                processCluster();
+            });
+
+            var processed = 0, type = 0, types = ["both", "building", "highway"];
+
+            function processCluster(){
+            	console.log(processed, type);
+            	$.ajax({
+                    type: "POST",
+                    url: "http://prjcts:8888/cityviscall/header/osm/reduce.php",
+                    data: {
+                        url: 'canvas-export/'+cluster[processed].cca3+"_"+types[type]+".png"
+                    }
+                }).done(function() {
+
+	                type++;
+	                if(type>=types.length){
+	                	type = 0;
+	                	processed++;
+	                	if(processed >= cluster.length){
+	                		console.log("done");
+	                	}else{
+	                		setTimeout(processCluster(), 1);
+	                	}
+	                }else{
+	                	setTimeout(processCluster(), 1);
+	                }
+
+				});
+            }
+
+        </script>
+    </body>
+</html>
