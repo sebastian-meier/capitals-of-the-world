@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>Walks</title>
+        <meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width">
+        <script src="libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
+		<script src="libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
+        <script src="libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
+        <style type="text/css">
+        	html,body{margin:0;padding:0;}
+        	img{
+        		float:left;
+        		width:25%;
+        		height:auto;
+        	}
+
+        	.container img{
+        		visibility: hidden;
+        	}
+
+        	.container span{
+        		float:left;
+        		margin:-20px 0 0 10px;
+        	}
+        </style>
+    </head>
+    <body>
+        <script>
+        	var type = "building"; //highway, both
+        	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
+            d3.csv("data/countries_short.csv", function(data){
+            	var images = d3.select("body").selectAll("img").data(data).enter().append("div")
+            		.style("background-image", function(d){ return "url(./export/"+d.cca3+"_"+type+".png"; })
+            		.attr("class", "container");
+
+            		images.append("img")
+            			.attr("src","");
+
+            		images.append("span")
+            			.text(function(d){ return this.datum().city; });
+            });
+        </script>
+    </body>
+</html>
