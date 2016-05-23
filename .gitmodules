@@ -1,0 +1,3 @@
+[submodule "mledoze_countries"]
+	path = mledoze_countries
+	url = https://github.com/mledoze/countries
