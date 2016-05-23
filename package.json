@@ -1,0 +1,19 @@
+{
+  "name": "capitals-of-the-world",
+  "version": "1.0.0",
+  "main": "data-handling/index.js",
+  "engines": {
+    "node": "4.1.0"
+  },
+  "scripts": {},
+  "dependencies": {
+    "query-overpass": "^1.1.0",
+    "fs": "^0.0.2",
+    "ya-csv": "0.9.4"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sebastian-meier/capitals-of-the-world.git"
+  }
+}

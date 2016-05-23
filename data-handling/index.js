@@ -4,7 +4,7 @@ var overpass = require('query-overpass'),
 
 var countries = [], c = 18, r = 0, buffer = {lat:0.03, lng:0.09}, rfolder = ["highway","building"];
 
-var reader = csv.createCsvFileReader('countries.csv', { columnsFromHeader: true });
+var reader = csv.createCsvFileReader('../data/countries.csv', { columnsFromHeader: true });
 reader.addListener('data', function(data) {
 	countries.push(data);
 });
@@ -40,7 +40,7 @@ function buildQuery(){
 				buildQuery();
 			}
 		}else{
-			var outputFilename = "./"+rfolder[r]+"/"+countries[c].cca3+".min.geojson";
+			var outputFilename = "../data/"+rfolder[r]+"/"+countries[c].cca3+".min.geojson";
 			fs.writeFile(outputFilename, JSON.stringify(data), function(err) {
 				console.log("done:",countries[c].name,r);
 				nextQuery();

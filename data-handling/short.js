@@ -3,7 +3,7 @@ var fs = require('fs'),
 
 var countries = [], c = 18, r = 0, buffer = {lat:0.03, lng:0.09}, rfolder = ["highway","building"];
 
-var reader = csv.createCsvFileReader('countries.csv', { columnsFromHeader: true });
+var reader = csv.createCsvFileReader('../data/countries.csv', { columnsFromHeader: true });
 reader.addListener('data', function(data) {
 	countries.push(data);
 });
@@ -20,7 +20,7 @@ function shorten(){
 		csv += countries[i].city+","+countries[i].country+","+countries[i].cca3+","+parseFloat(countries[i].latitude).toFixed(3)+","+parseFloat(countries[i].longitude).toFixed(3)+"\n";
 	}
 	
-	fs.writeFile("countries_short.csv", csv, function(err) {
+	fs.writeFile("../data/countries_short.csv", csv, function(err) {
 		console.log("done");
 		process.exit();
 	});

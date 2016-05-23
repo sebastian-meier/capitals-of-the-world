@@ -4,15 +4,15 @@
         <title>Walks</title>
         <meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width">
-        <script src="../../libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
-		<script src="../../libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
-        <script src="../../libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
+        <script src="../libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
+		<script src="../libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
+        <script src="../libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
     </head>
     <body>
         <script>
         	var cluster;
 
-            d3.csv('countries.csv', function(err, data){
+            d3.csv('../data/countries.csv', function(err, data){
                 cluster = data;
                 processCluster();
             });
@@ -23,9 +23,9 @@
             	console.log(processed, type);
             	$.ajax({
                     type: "POST",
-                    url: "http://prjcts:8888/cityviscall/header/osm/reduce.php",
+                    url: "[YOUR_URL]/rendering/reduce.php",
                     data: {
-                        url: 'canvas-export/'+cluster[processed].cca3+"_"+types[type]+".png"
+                        url: '../export/'+cluster[processed].cca3+"_"+types[type]+".png"
                     }
                 }).done(function() {
 

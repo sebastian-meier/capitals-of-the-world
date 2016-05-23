@@ -4,9 +4,9 @@
         <title>Walks</title>
         <meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width">
-        <script src="../../libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
-		<script src="../../libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
-        <script src="../../libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
+        <script src="../libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
+		<script src="../libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
+        <script src="../libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
     </head>
     <body>
         <script>
@@ -26,7 +26,7 @@
 
             var cluster, cluster_id, cluster_count = 0;
 
-            d3.csv('countries.csv', function(err, data){
+            d3.csv('../data/countries.csv', function(err, data){
                 cluster = data;
                 cluster_id = data[0].cca3;
                 console.log("cities:",data.length);
@@ -38,9 +38,9 @@
 
             function processCluster(){
 
-                d3.json('highway/'+cluster_id+'.min.geojson', function(err, data){
+                d3.json('../data/highway/'+cluster_id+'.min.geojson', function(err, data){
                 	highway_data = data;
-                	d3.json('building/'+cluster_id+'.min.geojson', function(err, data){
+                	d3.json('../data/building/'+cluster_id+'.min.geojson', function(err, data){
                 		building_data = data;
                     	
                     	projection.center([cluster[processed].longitude, cluster[processed].latitude]);
@@ -87,7 +87,7 @@
 						canvas.remove();
 	                    $.ajax({
 	                        type: "POST",
-	                        url: "http://prjcts:8888/cityviscall/header/osm/save.php",
+	                        url: "save.php",
 	                        data: {
 	                            content: image_data,
 	                            name:cluster_id+"_both.png"

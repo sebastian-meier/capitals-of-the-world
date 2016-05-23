@@ -7,11 +7,11 @@ if( isset($_POST["content"]) && !empty($_POST["content"]) && isset($_POST["name"
 		$data = $parts[1];
 		$encodedData = str_replace(' ','+',$data);
 		$data = base64_decode($encodedData);
-		$fp = fopen("./canvas-export/".$_POST["name"], 'w');
+		$fp = fopen("../export/".$_POST["name"], 'w');
 		fwrite($fp, $data);
 		fclose($fp);
 	}else{
-		$fp = fopen("./canvas-export/".$_POST["name"], 'w');
+		$fp = fopen("../export/".$_POST["name"], 'w');
 		fwrite($fp, $_POST["content"]);
 		fclose($fp);
 	}

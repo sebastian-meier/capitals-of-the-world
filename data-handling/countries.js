@@ -1,5 +1,5 @@
 var fs = require('fs'),
-	countries = require('./countries.json');
+	countries = require('../data/countries.json');
 
 console.log(countries);
 
@@ -9,7 +9,7 @@ for(var c = 0; c<countries.length; c++){
 	csv += countries[c].capital+","+countries[c].name.common+","+countries[c].cca3+"\n";
 }
 
-fs.writeFile("countries.csv", csv, function(err) {
+fs.writeFile("../data/countries.csv", csv, function(err) {
 	console.log("done");
 	process.exit();
 });
