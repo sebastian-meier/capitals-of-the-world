@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <title>Walks</title>
+        <title>Capitals of the world</title>
         <meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width">
         <script src="libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
@@ -26,19 +26,27 @@
         </style>
     </head>
     <body>
+    	<div id="header">
+    		<h1>Capitals of the world</h1>
+    	</div>
+    	<div id="intro">
+    		<p></p>
+    	</div>
+    	<div id="maps"></div>
         <script>
-        	var type = "building"; //highway, both
+        	var type = "building", //highway, both
+        		images;
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
-            	var images = d3.select("body").selectAll("img").data(data).enter().append("div")
+            	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(./export/"+d.cca3+"_"+type+".png"; })
             		.attr("class", "container");
 
-            		images.append("img")
-            			.attr("src","");
+        		images.append("img")
+        			.attr("src","");
 
-            		images.append("span")
-            			.text(function(d){ return this.datum().city; });
+        		images.append("span")
+        			.text(function(d){ return this.datum().city; });
             });
         </script>
     </body>
