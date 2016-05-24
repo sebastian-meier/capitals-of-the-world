@@ -84,7 +84,7 @@
 
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
-            	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
+            	/*images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(./export/"+d.cca3+"_"+type+".png"; })
             		.attr("class", "container");
 
@@ -92,7 +92,7 @@
         			.attr("src","");
 
         		images.append("span")
-        			.text(function(d){ return this.datum().city; });
+        			.text(function(d){ return this.datum().city; });*/
             });
         </script>
     </body>
