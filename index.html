@@ -174,8 +174,8 @@
         			d3.select(this).append("span")
         				.text(function(d){
         					var str = (data.city+", "+data.country);
-        					if(str.length > 40){
-        						str = str.substr(0,40)+"...";
+        					if(str.length > 35){
+        						str = str.substr(0,35)+"...";
         					}
         					return str; 
         				});
