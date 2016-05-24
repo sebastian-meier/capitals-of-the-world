@@ -62,6 +62,18 @@
         	#sizeSlider{
         		width:100%;
         	}
+
+        	.mapcontainer{
+        		float:left;
+        	}
+
+        	.mapcontainer span{
+        		display: none;
+        	}
+
+        	.mapcontainer:hover span{
+        		display: block;
+        	}
         </style>
     </head>
     <body>
@@ -140,7 +152,7 @@
             	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; })
             		.style("width", sizes[w]+"%")
-            		.attr("class", "container");
+            		.attr("class", "mapcontainer");
 
         		images.each(function(data){
         			d3.select(this).append("img")
