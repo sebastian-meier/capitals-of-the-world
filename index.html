@@ -98,15 +98,19 @@
 
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
+            	console.log(data);
             	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
-            		.style("background-image", function(d){ return "url(./export/"+d.cca3+"_"+type+".png"; })
+            		.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; })
             		.attr("class", "container");
 
-        		images.append("img")
-        			.attr("src","");
+        		images.each(function(data){
+        			d3.select(this).append("img")
+        				.attr("src","TKL_highway.png");
+        			});
 
-        		images.append("span")
-        			.text(function(d){ return this.datum().city; });*/
+        		images.each(function(data){
+        			d3.select(this).append("span")
+        				.text(function(d){ return data.city; });
             });
         </script>
     </body>
