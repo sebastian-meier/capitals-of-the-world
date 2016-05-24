@@ -65,9 +65,15 @@
     			<div class="hidden-xs col-sm-2 col-lg-4"></div>
     			<div class="col-xs-12 col-sm-8 col-lg-4">
 		    		<div class="btn-group btn-group-sm btn-group-justified" role="group" id="btns">
-						<button type="button" id="highway" class="btn btn-default">Roads</button>
-						<button type="button" id="building" class="btn btn-default">Buildings</button>
-						<button type="button" id="both" class="btn btn-default active">Both</button>
+		    			<div class="btn-group">
+							<button type="button" id="highway" class="btn btn-default">Roads</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" id="building" class="btn btn-default">Buildings</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" id="both" class="btn btn-default active">Both</button>
+					</div>
 					</div>
 				</div>
 				<div class="hidden-xs col-sm-2 col-lg-4"></div>
@@ -84,7 +90,7 @@
 
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
-            	/*images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
+            	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(./export/"+d.cca3+"_"+type+".png"; })
             		.attr("class", "container");
 
