@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width">
 		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 		<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.0.2/css/bootstrap-slider.min.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -90,9 +91,25 @@
 				</div>
 				<div class="hidden-xs col-sm-2 col-lg-4"></div>
 			</div>
+			<div class="container size-container">
+				<span class="width-label">Image Width</span><br />
+				<input
+					type="text"
+					id="size"
+					data-provide="slider"
+					data-slider-ticks="[10, 25, 33, 50, 100]"
+					data-slider-ticks-labels='["10%", "25%", "33%", "50%", "100%"]'
+					data-slider-min="1"
+					data-slider-max="3"
+					data-slider-step="1"
+					data-slider-value="3"
+					data-slider-tooltip="hide"
+				>
+			</div>
     	</div>
     	<div id="maps"></div>
         <script src="libs/jquery-1.11.1.min.js" charset="utf-8" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.0.2/bootstrap-slider.min.js"></script>
 		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 		<script src="libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
         <script src="libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
@@ -100,11 +117,15 @@
         	var type = "both", //building, highway, both
         		images;
 
+        	var mySlider = $("input#size").bootstrapSlider();
+
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
             	console.log(data);
+            	var w = mySlider.bootstrapSlider('getValue');
             	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; })
+            		.style("width", w+"%")
             		.attr("class", "container");
 
         		images.each(function(data){
@@ -126,6 +147,11 @@
             		d3.select('#'+type).classed("active",true);
 	            	images.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; });
             	}
+            });
+
+            d3.select('#size').on('change',function(){
+				var w = mySlider.bootstrapSlider('getValue');
+            	images.style("width", w+"%");
             });
         </script>
     </body>
