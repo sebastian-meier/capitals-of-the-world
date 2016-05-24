@@ -185,6 +185,7 @@
 
             d3.select('#size').on('change', function(){
 				var w = d3.select('#size').attr("value");
+				console.log(w);
             	images.style("width", sizes[w]+"%");
             });
 
