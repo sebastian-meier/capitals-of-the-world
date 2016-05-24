@@ -128,7 +128,10 @@
         		images,
         		sizes = [10, 25, 33, 50, 100];
 
-        	var size = $("#size").slider({});
+        	var size = $("#size").slider().on('slide', function(){
+				var w = size.getValue();
+            	images.style("width", sizes[w]+"%");
+            }).data('slider');
 
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
@@ -160,10 +163,6 @@
             	}
             });
 
-            size.on('slide', function(){
-				var w = size.getValue();
-            	images.style("width", sizes[w]+"%");
-            });
         </script>
     </body>
 </html>
