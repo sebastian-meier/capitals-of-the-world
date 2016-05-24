@@ -16,10 +16,14 @@
         		float:left;
         		width:25%;
         		height:auto;
+        		background-repeat: no-repeat;
+        		background-size: 100% 100%;
         	}
 
         	.container img{
         		visibility: hidden;
+        		width:100%;
+        		height:auto;
         	}
 
         	.container span{
@@ -105,7 +109,7 @@
 
         		images.each(function(data){
         			d3.select(this).append("img")
-        				.attr("src","TKL_highway.png");
+        				.attr("src","export/TKL_highway.png");
         			});
 
         		images.each(function(data){
