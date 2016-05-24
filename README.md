@@ -3,6 +3,8 @@
 
 ![Capitals of the world](https://raw.githubusercontent.com/sebastian-meier/capitals-of-the-world/master/thumb.png)
 
+Explore the maps online: http://sebastian-meier.github.io/capitals-of-the-world/
+
 git submodule add https://github.com/mledoze/countries ./mledoze_countries
 
 ### Data Handling
