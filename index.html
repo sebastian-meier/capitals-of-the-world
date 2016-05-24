@@ -149,6 +149,7 @@
         		sizes = [10, 25, 33, 50, 100];
 
         	var size = $("#size").slider().on('slide', function(){
+            	console.log("slide");
 				var w = size.getValue();
             	images.style("width", sizes[w]+"%");
             }).data('slider');
