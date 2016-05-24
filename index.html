@@ -97,12 +97,12 @@
 					type="text"
 					id="size"
 					data-provide="slider"
-					data-slider-ticks="[10, 25, 33, 50, 100]"
+					data-slider-ticks="[1, 2, 3, 4, 5]"
 					data-slider-ticks-labels='["10%", "25%", "33%", "50%", "100%"]'
 					data-slider-min="1"
-					data-slider-max="3"
+					data-slider-max="5"
 					data-slider-step="1"
-					data-slider-value="3"
+					data-slider-value="2"
 					data-slider-tooltip="hide"
 				>
 			</div>
@@ -115,7 +115,8 @@
         <script src="libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
         <script>
         	var type = "both", //building, highway, both
-        		images;
+        		images,
+        		sizes = [10, 25, 33, 50, 100];
 
         	var mySlider = $("input#size").bootstrapSlider();
 
@@ -125,7 +126,7 @@
             	var w = mySlider.bootstrapSlider('getValue');
             	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; })
-            		.style("width", w+"%")
+            		.style("width", sizes[w]+"%")
             		.attr("class", "container");
 
         		images.each(function(data){
@@ -151,7 +152,7 @@
 
             d3.select('#size').on('change',function(){
 				var w = mySlider.bootstrapSlider('getValue');
-            	images.style("width", w+"%");
+            	images.style("width", sizes[w]+"%");
             });
         </script>
     </body>
