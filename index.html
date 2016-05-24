@@ -75,36 +75,42 @@
     	</div>
     	<div id="control">
     		<div class="container">
-    			<div class="hidden-xs col-sm-2 col-lg-4"></div>
-    			<div class="col-xs-12 col-sm-8 col-lg-4">
-		    		<div class="btn-group btn-group-sm btn-group-justified" role="group" id="btns">
-		    			<div class="btn-group">
-							<button type="button" id="highway" class="btn btn-default">Roads</button>
+    			<div class="row">
+	    			<div class="hidden-xs col-sm-2 col-lg-4"></div>
+	    			<div class="col-xs-12 col-sm-8 col-lg-4">
+			    		<div class="btn-group btn-group-sm btn-group-justified" role="group" id="btns">
+			    			<div class="btn-group">
+								<button type="button" id="highway" class="btn btn-default">Roads</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" id="building" class="btn btn-default">Buildings</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" id="both" class="btn btn-default active">Both</button>
 						</div>
-						<div class="btn-group">
-							<button type="button" id="building" class="btn btn-default">Buildings</button>
 						</div>
-						<div class="btn-group">
-							<button type="button" id="both" class="btn btn-default active">Both</button>
 					</div>
-					</div>
+					<div class="hidden-xs col-sm-2 col-lg-4"></div>
 				</div>
-				<div class="hidden-xs col-sm-2 col-lg-4"></div>
-			</div>
-			<div class="container size-container">
-				<span class="width-label">Image Width</span><br />
-				<input
-					type="text"
-					id="size"
-					data-provide="slider"
-					data-slider-ticks="[1, 2, 3, 4, 5]"
-					data-slider-ticks-labels='["10%", "25%", "33%", "50%", "100%"]'
-					data-slider-min="1"
-					data-slider-max="5"
-					data-slider-step="1"
-					data-slider-value="2"
-					data-slider-tooltip="hide"
-				>
+				<div class="row">
+					<div class="hidden-xs col-sm-2 col-lg-4"></div>
+	    			<div class="col-xs-12 col-sm-8 col-lg-4">
+						<span class="width-label">Image Width</span><br />
+						<input
+							type="text"
+							id="size"
+							data-provide="slider"
+							data-slider-ticks="[1, 2, 3, 4, 5]"
+							data-slider-ticks-labels='["10%", "25%", "33%", "50%", "100%"]'
+							data-slider-min="1"
+							data-slider-max="5"
+							data-slider-step="1"
+							data-slider-value="2"
+							data-slider-tooltip="hide"
+						 />
+					</div>
+					<div class="hidden-xs col-sm-2 col-lg-4"></div>
+				</div>
 			</div>
     	</div>
     	<div id="maps"></div>
