@@ -97,7 +97,7 @@
 		<script src="libs/d3.v3.min.js" charset="utf-8" type="text/javascript" ></script>
         <script src="libs/topojson.v1.min.js" charset="utf-8" type="text/javascript" ></script>
         <script>
-        	var type = "building", //highway, both
+        	var type = "both", //building, highway, both
         		images;
 
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
@@ -116,6 +116,16 @@
         			d3.select(this).append("span")
         				.text(function(d){ return data.city; });
         		});
+            });
+
+            d3.selectAll('.btn').on('click', function(){
+            	ttype = d3.select(this).attr("id");
+            	if(ttype !== type){
+            		type = ttype;
+            		d3.selectAll('.btn').classed("active",false);
+            		d3.select('#'+type).classed("active",true);
+	            	images.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; });
+            	}
             });
         </script>
     </body>
