@@ -152,15 +152,10 @@
         		images,
         		sizes = [10, 25, 33.33, 50, 100];
 
-        	var size = $("#size").slider().on('slide', function(){
-            	console.log("slide");
-				var w = size.getValue();
-            	images.style("width", sizes[w]+"%");
-            }).data('slider');
+        	var size = $("#size").slider().data('slider');
 
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
-            	console.log(data);
             	var w = size.getValue();
             	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; })
@@ -186,6 +181,11 @@
             		d3.select('#'+type).classed("active",true);
 	            	images.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; });
             	}
+            });
+
+            d3.select('#size').on('change', function(){
+				var w = size.getValue();
+            	images.style("width", sizes[w]+"%");
             });
 
         </script>
