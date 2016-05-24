@@ -128,12 +128,12 @@
 							type="text"
 							id="size"
 							data-provide="slider"
-							data-slider-ticks="[1, 2, 3, 4, 5]"
+							data-slider-ticks="[0, 1, 2, 3, 4]"
 							data-slider-ticks-labels='["10%", "25%", "33%", "50%", "100%"]'
-							data-slider-min="1"
-							data-slider-max="5"
+							data-slider-min="0"
+							data-slider-max="4"
 							data-slider-step="1"
-							data-slider-value="3"
+							data-slider-value="2"
 							data-slider-tooltip="hide"
 						 />
 					</div>
@@ -157,6 +157,7 @@
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
             	var w = d3.select('#size').attr("value");
+            	console.log(w);
             	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; })
             		.style("width", sizes[w]+"%")
@@ -183,7 +184,7 @@
             	}
             });
 
-            d3.select('#size').on('change', function(){
+            d3.select('#size').on('input', function(){
 				var w = d3.select('#size').attr("value");
 				console.log(w);
             	images.style("width", sizes[w]+"%");
