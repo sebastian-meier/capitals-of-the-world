@@ -128,12 +128,12 @@
         		images,
         		sizes = [10, 25, 33, 50, 100];
 
-        	var mySlider = $("input#size").bootstrapSlider();
+        	var size = $("#size").slider({});
 
         	//TODO: Add header, add buttons to switch images, add hover with meta information for each city
             d3.csv("data/countries_short.csv", function(data){
             	console.log(data);
-            	var w = mySlider.bootstrapSlider('getValue');
+            	var w = size.getValue();
             	images = d3.select("#maps").selectAll("div").data(data).enter().append("div")
             		.style("background-image", function(d){ return "url(export/"+d.code+"_"+type+".png"; })
             		.style("width", sizes[w]+"%")
@@ -160,8 +160,8 @@
             	}
             });
 
-            d3.select('#size').on('change',function(){
-				var w = mySlider.bootstrapSlider('getValue');
+            size.on('slide', function(){
+				var w = size.getValue();
             	images.style("width", sizes[w]+"%");
             });
         </script>
