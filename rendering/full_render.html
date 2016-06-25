@@ -12,6 +12,9 @@
         <script>
             var width=2100, owidth = width,
             	type="building", //building, //highway
+            	mode="invert", //normal, //invert > background dark, roads/buildings white
+                color = "rgb(0,0,0)",
+                icolor = "rgb(255,255,255)",
                 height=500, oheight = height,
                 projection = d3.geo.mercator()
                     .translate([width / 2, height / 2])
@@ -50,6 +53,12 @@
 	                        .attr("height", height);
 
 	                    var context = canvas.node().getContext("2d");
+
+	                    if(mode==="invert"){
+	                    	context.fillStyle = color;
+			                context.fillRect(0, 0, width, height);
+	                    }
+
 	                    var ctx_path = d3.geo.path()
 	                        .projection(projection)
 	                        .context(context);
@@ -67,7 +76,7 @@
 
 		                    	context.closePath();
 
-			                    context.fillStyle = 'rgb(0, 0, 0)';
+			                    context.fillStyle = ((mode==="invert")?icolor:color);
 		                    	context.fill();
 			                }
 		                }
@@ -79,6 +88,7 @@
 
 		                    if(ftr.features[0].geometry.type === "LineString"){
 			                    ctx_path(ftr);
+			                    context.strokeStyle = ((mode==="invert")?icolor:color);
 		                    	context.stroke();
 			                }
 		                }
@@ -90,7 +100,7 @@
 	                        url: "save.php",
 	                        data: {
 	                            content: image_data,
-	                            name:cluster_id+"_both.png"
+	                            name:cluster_id+((mode==="invert")?"_i":"")+"_both.png"
 	                        }
 	                    }).done(function() {
 

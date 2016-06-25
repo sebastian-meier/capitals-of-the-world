@@ -17,13 +17,13 @@
                 processCluster();
             });
 
-            var processed = 0, type = 0, types = ["both", "building", "highway"];
+            var processed = 0, type = 0, types = ["both", "building", "highway", "i_both", "i_building", "i_highway", "i_both_high"];
 
             function processCluster(){
             	console.log(processed, type);
             	$.ajax({
                     type: "POST",
-                    url: "[YOUR_URL]/rendering/reduce.php",
+                    url: "reduce.php",
                     data: {
                         url: '../export/'+cluster[processed].cca3+"_"+types[type]+".png"
                     }
