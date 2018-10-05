@@ -11,10 +11,10 @@
     <body>
         <script>
             var width=2100, owidth = width,
-            	type="highway", //building, //highway
-            	mode="invert", //normal, //invert > background dark, roads/buildings white
+            	type="building", //building, //highway
+            	mode="normal", //normal, //invert > background dark, roads/buildings white
                 height=500, oheight = height,
-                color = "rgb(0,0,0)",
+                color = "rgb(255,255,255)",
                 icolor = "rgb(255,255,255)",
                 projection = d3.geo.mercator()
                     .translate([width / 2, height / 2])
@@ -92,7 +92,7 @@
                         url: "save.php",
                         data: {
                             content: image_data,
-                            name:cluster_id+"_"+((mode==="invert")?"i_":"")+type+".png"
+                            name:cluster_id+"_"+((mode==="invert")?"i_":"")+type+"_white.png"
                         }
                     }).done(function() {
 
